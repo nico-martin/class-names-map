@@ -149,7 +149,7 @@ In this case we will end up with the following markup:
 ```html
 
 <div class="😀">
-    <p class="😃">Hello World</p>
+    <p class="🙃">Hello World</p>
     <img class="😁 😅" alt="My Image" src="..."/>
 </div>
 ```
