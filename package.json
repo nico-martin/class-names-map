@@ -1,0 +1,23 @@
+{
+  "name": "@nico-martin/class-names-map",
+  "version": "0.0.1",
+  "description": "classNames Map is a Webpack/css-loader plugin that shortens the classNames of imported css modules based on a configurable character map",
+  "main": "lib/index.js",
+  "author": "mail@nicomartin.ch",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nico-martin/class-names-map.git"
+  },
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {},
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "bugs": {
+    "url": "https://github.com/nico-martin/class-names-map/issues"
+  },
+  "homepage": "https://github.com/nico-martin/class-names-map#readme"
+}
