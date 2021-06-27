@@ -38,6 +38,7 @@ npm install @nico-martin/class-names-map --save-dev
 ## Konfiguration
 
 *webpack.config.js*
+
 ```js
 const getLocalIdent = require('@nico-martin/class-names-map/css-loader');
 
@@ -54,7 +55,42 @@ module.exports = (env, argv) => {
               localIdentName: '[name]__[local]--[hash:base64:5]',
               getLocalIdent: getLocalIdent(/* options */)
             }
-          }  
+          }
+        ],
+      },
+    ]
+  }
+};
+```
+
+### development build
+
+It makes sense to only apply this plugin to production builds
+
+*webpack.config.js*
+
+```js
+const getLocalIdent = require('@nico-martin/class-names-map/css-loader');
+
+module.exports = (env, argv) => {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          "style-loader",
+          {
+            loader: 'css-loader',
+            modules: {
+              localIdentName: '[name]__[local]--[hash:base64:5]',
+              ...(argv.mode === 'production' ?
+                  {
+                    getLocalIdent: getLocalIdent(/* options */)
+                  } :
+                  {}
+              ),
+            }
+          }
         ],
       },
     ]
@@ -63,20 +99,26 @@ module.exports = (env, argv) => {
 ```
 
 ## Options
+
 As option the `getLocalIdent` method accepts an object with the following properties:
 
 ### characters
+
 An array of possible characters
 
-**default:** `["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]`
+**
+default:** `["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]`
 
 ### separator
-After each character has been used once, "classNames Map" creates string combinations: `.a, .b, .c, ... .z, .a_a, .a_b, .a_c`.
-With a separator you can define, which character should be used as a separator.
+
+After each character has been used once, "classNames Map" creates string
+combinations: `.a, .b, .c, ... .z, .a_a, .a_b, .a_c`. With a separator you can define, which character should be used as
+a separator.
 
 **default:** `'_'`
 
 ### shuffleCharsacters
+
 a boolean, wether the character map should be in random order.
 
 **default:** `true`
@@ -84,6 +126,7 @@ a boolean, wether the character map should be in random order.
 ### full example
 
 *webpack.config.js*
+
 ```js
 const getLocalIdent = require('@nico-martin/class-names-map/css-loader');
 
@@ -104,7 +147,7 @@ module.exports = (env, argv) => {
                 shuffleCharsacters: false,
               })
             }
-          }  
+          }
         ],
       },
     ]
@@ -115,6 +158,7 @@ module.exports = (env, argv) => {
 ## Emoji
 
 As a funny side effect we can also use an array of emojis as characters:
+
 ```js
 const getLocalIdent = require('@nico-martin/class-names-map/css-loader');
 const emojis = require('@nico-martin/class-names-map/emojis');
@@ -136,7 +180,7 @@ module.exports = (env, argv) => {
                 shuffleCharsacters: false,
               })
             }
-          }  
+          }
         ],
       },
     ]
