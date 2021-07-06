@@ -37,9 +37,8 @@ npm install @nico-martin/class-names-map --save-dev
 
 ## Konfiguration
 
-*webpack.config.js*
-
 ```js
+// webpack.config.js
 const getLocalIdent = require('@nico-martin/class-names-map/css-loader');
 
 module.exports = (env, argv) => {
@@ -67,9 +66,8 @@ module.exports = (env, argv) => {
 
 It makes sense to only apply this plugin to production builds
 
-*webpack.config.js*
-
 ```js
+// webpack.config.js
 const getLocalIdent = require('@nico-martin/class-names-map/css-loader');
 
 module.exports = (env, argv) => {
@@ -106,8 +104,8 @@ As option the `getLocalIdent` method accepts an object with the following proper
 
 An array of possible characters
 
-**
-default:** `["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]`
+**default:**
+`["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]`
 
 ### separator
 
@@ -125,9 +123,8 @@ a boolean, wether the character map should be in random order.
 
 ### full example
 
-*webpack.config.js*
-
 ```js
+// webpack.config.js
 const getLocalIdent = require('@nico-martin/class-names-map/css-loader');
 
 module.exports = (env, argv) => {
@@ -155,11 +152,37 @@ module.exports = (env, argv) => {
 };
 ```
 
+## NextJS
+
+This package also provides a wrapper for [NextJS](https://nextjs.org/). To use "classNames Map" with NextJS you can
+simply add `withClassNamesMap` to your `next.config.js`:
+
+```js
+// next.config.js
+const withClassNamesMap = require('@nico-martin/class-names-map/nextjs.js');
+
+module.exports = withClassNamesMap({
+  ...yourConfig,
+  classNamesMap: {
+    characters: ['a', 'b', 'c'],
+    separator: '',
+    shuffleCharsacters: false,
+    applyInDev: false,
+  },
+});
+```
+
+As you can see, the options are pretty much the same as in the css-loader usecase.
+
+The only difference is `applyInDev (boolean)`. By default, classNames Map will only be applied in production build. If
+you also want to apply it in development, you can set `applyInDev` to `true`.
+
 ## Emoji
 
 As a funny side effect we can also use an array of emojis as characters:
 
 ```js
+// webpack.config.js
 const getLocalIdent = require('@nico-martin/class-names-map/css-loader');
 const emojis = require('@nico-martin/class-names-map/emojis');
 
