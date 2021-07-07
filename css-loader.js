@@ -1,7 +1,8 @@
 const generateUniqueClassName = require('./index.js');
 
 module.exports = (options = {}) => {
-  const separator = options.separator || '_';
+  const separator =
+    typeof options.separator === 'undefined' ? '_' : options.separator;
   let characters =
     options.characters ||
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
