@@ -3,7 +3,7 @@ const getLocalIdent = require('./css-loader.js');
 const withClassNamesMap = (nextConfig) => {
   const classNamesMapConfig = nextConfig.classNamesMap || {};
   delete nextConfig.classNamesMap;
-  const applyInDev = classNamesMapConfig.applyInDev !== false;
+  const applyInDev = classNamesMapConfig.applyInDev === true;
   delete classNamesMapConfig.applyInDev;
 
   return Object.assign({}, nextConfig, {
