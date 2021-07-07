@@ -115,12 +115,6 @@ a separator.
 
 **default:** `'_'`
 
-### shuffleCharsacters
-
-a boolean, wether the character map should be in random order.
-
-**default:** `true`
-
 ### full example
 
 ```js
@@ -141,7 +135,6 @@ module.exports = (env, argv) => {
               getLocalIdent: getLocalIdent({
                 characters: ['a', 'b', 'c'],
                 separator: '',
-                shuffleCharsacters: false,
               })
             }
           }
@@ -166,7 +159,6 @@ module.exports = withClassNamesMap({
   classNamesMap: {
     characters: ['a', 'b', 'c'],
     separator: '',
-    shuffleCharsacters: false,
     applyInDev: false,
   },
 });
@@ -200,7 +192,6 @@ module.exports = (env, argv) => {
               getLocalIdent: getLocalIdent({
                 characters: emojis,
                 separator: '_',
-                shuffleCharsacters: false,
               })
             }
           }

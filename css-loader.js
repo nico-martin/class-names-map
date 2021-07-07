@@ -1,16 +1,12 @@
 const generateUniqueClassName = require('./index.js');
-const shuffleArray = require('./helpers/shuffle.js');
 
 module.exports = (options = {}) => {
-  const separator = options.separator || '_';
-  const shuffleCharsacters = options.shuffleCharsacters !== false;
+  const separator =
+    typeof options.separator === 'undefined' ? '_' : options.separator;
   let characters =
     options.characters ||
     'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   characters = characters.filter((x, i, a) => Boolean(a) && a.indexOf(x) === i);
-  if (shuffleCharsacters) {
-    characters = shuffleArray(characters);
-  }
 
   return (context, _, localName) => {
     const key = context.resourcePath + localName;

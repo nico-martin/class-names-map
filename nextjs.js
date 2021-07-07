@@ -6,9 +6,8 @@ const withClassNamesMap = (nextConfig) => {
   const applyInDev = config.applyInDev !== false;
   delete config.applyInDev;
 
-  return {
-    ...nextConfig,
-    webpack: (config) => {
+  return Object.assign({}, nextConfig, {
+    webpack(config, options) {
       config.module.rules[1].oneOf.forEach((moduleLoader, i) => {
         Array.isArray(moduleLoader.use) &&
           moduleLoader.use.forEach((l) => {
@@ -34,9 +33,14 @@ const withClassNamesMap = (nextConfig) => {
             }
           });
       });
+
+      if (typeof nextConfig.webpack === 'function') {
+        config = nextConfig.webpack(config, options);
+      }
+
       return config;
     },
-  };
+  });
 };
 
 module.exports = withClassNamesMap;
