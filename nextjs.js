@@ -1,10 +1,10 @@
 const getLocalIdent = require('./css-loader.js');
 
 const withClassNamesMap = (nextConfig) => {
-  const config = nextConfig.classNamesMap || {};
+  const classNamesMapConfig = nextConfig.classNamesMap || {};
   delete nextConfig.classNamesMap;
-  const applyInDev = config.applyInDev !== false;
-  delete config.applyInDev;
+  const applyInDev = classNamesMapConfig.applyInDev !== false;
+  delete classNamesMapConfig.applyInDev;
 
   return Object.assign({}, nextConfig, {
     webpack(config, options) {
@@ -25,7 +25,7 @@ const withClassNamesMap = (nextConfig) => {
                   localIdentName: '[name]_[local]-[hash:base64:5]',
                   ...(process.env.NODE_ENV !== 'development' || applyInDev
                     ? {
-                        getLocalIdent: getLocalIdent(config),
+                        getLocalIdent: getLocalIdent(classNamesMapConfig),
                       }
                     : {}),
                 },
